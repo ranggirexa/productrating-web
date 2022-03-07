@@ -23,6 +23,8 @@
 
 # Submit your changes
 
-- Clone this repository
-- Commit your changes
-- Zip your repository and email us the zip
+- Clone this repository.
+- Commit your changes.
+  - Commit code that is logically related.
+  - Don't put everything in one commit. It's hard to review the changes if a commit is too big.
+- Zip your repository and email us the zip.
