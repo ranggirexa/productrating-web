@@ -34,7 +34,11 @@ class Purchase < ApplicationRecord
   # TODO: Implement this logic
   # - Return true if a review for this purchase exists in the database
   # - Return false otherwise
-  def review_exist?
-    false
+  def review_exist
+    if Purchase.where(id: self.id).left_joins(:reviews).nil?
+      return false
+    else
+      return true
+    end
   end
 end

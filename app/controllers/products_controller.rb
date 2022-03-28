@@ -25,8 +25,8 @@ class ProductsController < ApplicationController
 
   private
     def set_variable
-      @product = Product.get_data(id: params[:id]) if !@product.present?
-      @review = Review.get_data(product_id: @product.first.id) if @product.present?
+      @product = Product.find(params[:id]) if !@product.present?
+      @review = Review.get_data(product_id: @product.id) if @product.present?
       @store = Store.get_data(params)
     end
 

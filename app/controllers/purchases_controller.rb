@@ -6,7 +6,7 @@ class PurchasesController < ApplicationController
   end
 
   def create
-      @purchase = @product.purchases.new
+    @purchase = @product.purchases.new
     # TODO: Also decrease product quantity. #done
     # - For example, if `purchase.quantity` is 3, decrease `product.quantity` by 3
     # - Display an error if `product.quantity` is less than 0 (negative number)

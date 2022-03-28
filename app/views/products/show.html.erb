@@ -21,29 +21,27 @@
           </tr>
         </thead>
         <tbody>
-          <% @product.each do |product| %>
             <tr>
-              <td> <%= product.id %></td>
-              <td> <%= product.name %></td>
-              <td> <%= product.store.name %></td>
-              <td> <%= product.price %></td>
-              <td> <%= product.quantity %></td>
-              <td> <%= product.purchases.sum(:quantity) %></td>
-              <td> <%= product.quantity.to_i - product.purchases.sum(:quantity).to_i %></td>
-              <td> <%= product.created_at.strftime("%d-%m-%Y %H:%M") %></td>
+              <td> <%= @product.id %></td>
+              <td> <%= @product.name %></td>
+              <td> <%= @product.store.name %></td>
+              <td> <%= format_price(@product.price) %></td>
+              <td> <%= @product.quantity %></td>
+              <td> <%= @product.purchases.sum(:quantity) %></td>
+              <td> <%= @product.quantity.to_i - @product.purchases.sum(:quantity).to_i %></td>
+              <td> <%= @product.created_at.strftime("%d-%m-%Y %H:%M") %></td>
               <td> <%= @review.average(:rating).to_f.round(2) %></td>
             </tr>
-          <% end %>
         </tbody>
       </table>
     </div>
   </div>
 </div>
 
-<% if(@product.first.quantity.to_i - @product.first.purchases.sum(:quantity).to_i) == 0  %>
+<% if(@product.quantity.to_i - @product.purchases.sum(:quantity).to_i) == 0  %>
   <h3> This Product has sold out </h3>
 <% else %>
-  <%= link_to 'Buy', new_product_purchase_url(@product.first.id) %>
+  <%= link_to 'Buy', new_product_purchase_url(@product.id) %>
 <% end %>
 
 <div>
@@ -52,8 +50,8 @@
 <h2>Purchases History</h2>
 
 <ul>
-<% @product.first.purchases.each do |purchase| %>
-  <li><%= link_to "Purchase #{purchase.id}", product_purchase_path(@product.first.id, purchase.id) %></li>
+<% @product.purchases.each do |purchase| %>
+  <li><%= link_to "Purchase #{purchase.id}", product_purchase_path(@product.id, purchase.id) %></li>
 <% end %>
 </ul>
 
