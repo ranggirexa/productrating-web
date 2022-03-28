@@ -23,13 +23,33 @@ Purchased at: <%= @purchase.created_at %>
 </div>
 
 <br />
-
-<h2>Review</h2>
-
-<% if @purchase.review_exist? %>
-  <%# TODO: Display the review here %>
-<% else %>
-  <%= link_to 'Give a Review', new_review_url(review: { purchase_id: @purchase.id }) %>
-<% end %>
-
+<div class="box box-default">
+  <div class="box-header with-border">
+    <h3 class="box-title">
+      Review
+    </h3>
+  </div>
+  <div class="box-body">
+    <div class="table-responsive">
+      <table id="review_table" class="table table-bordered table-striped">
+        <thead>
+          <tr>
+            <th style="width: 10%;">Rating</th>
+            <th style="width: 10%;">Comment </th>
+            <th style="width: 10%;">Date</th>
+          </tr>
+        </thead>
+        <tbody>
+          <% @purchase.reviews.each do |review| %>
+            <tr>
+              <td><%= review.rating %></td>
+              <td><%= review.comment %></td>
+              <td><%= review.created_at.strftime("%d-%m-%Y %H:%M") %></td>
+            </tr>
+          <% end %>
+        </tbody>
+      </table>
+    </div>
+  </div>
 </div>
+<%= link_to 'Give a Review', new_review_url(review: { purchase_id: @purchase.id }) %>

@@ -24,7 +24,7 @@ class Review < ApplicationRecord
   validates :comment, presence: true
 
   validate :rating_within_limit
-  
+
   def rating_within_limit
     # TODO: Implement validation logic for `rating`
     # - Rating cannot be greater than 5
