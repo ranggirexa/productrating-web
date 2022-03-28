@@ -6,11 +6,12 @@
   </div>
   <div class="box-body">
     <div class="table-responsive">
-      <table id="review_table" class="table table-bordered table-striped">
+      <table id="review_table" class="table table-bordered table-striped" border="1">
         <thead>
           <tr>
             <th style="width: 10%;">id</th>
-            <th style="width: 10%;">Name </th>
+            <th style="width: 10%;">Product Name </th>
+            <th style="width: 10%;">Store Name </th>
             <th style="width: 10%;">Price</th>
             <th style="width: 10%;">Quantity</th>
             <th style="width: 10%;">Sold</th>
@@ -24,6 +25,7 @@
             <tr>
               <td> <%= product.id %></td>
               <td> <%= product.name %></td>
+              <td> <%= product.store.name %></td>
               <td> <%= product.price %></td>
               <td> <%= product.quantity %></td>
               <td> <%= product.purchases.sum(:quantity) %></td>

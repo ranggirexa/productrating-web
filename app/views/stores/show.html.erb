@@ -1,0 +1,28 @@
+<div class="box box-default">
+  <div class="box-header with-border">
+    <h3 class="box-title">
+      Store #<%= @store.id %> (<%= @store.name %>)
+    </h3>
+  </div>
+  <div class="box-body">
+    <div class="table-responsive">
+      <table id="review_table" class="table table-bordered table-striped" border="1">
+        <thead>
+          <tr>
+            <th style="width: 10%;">Product</th>
+            <th style="width: 10%;">Rating</th>
+          </tr>
+        </thead>
+        <tbody>
+          <% @store.products.each do |product| %>
+          <tr>
+            <td><%= link_to product.name, product_url(product) %></td>
+            <td> <%= @review.where("purchases.product_id = ? ", product.id).average(:rating) %></td>
+          </tr>
+          <% end %>
+        </tbody>
+      </table>
+    </div>
+  </div>
+</div>
+<%= link_to 'Back', stores_path %>

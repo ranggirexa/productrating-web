@@ -8,9 +8,19 @@
 #  quantity   :integer
 #  created_at :datetime         not null
 #  updated_at :datetime         not null
+#  store_id   :bigint
+#
+# Indexes
+#
+#  index_products_on_store_id  (store_id)
+#
+# Foreign Keys
+#
+#  fk_rails_...  (store_id => stores.id)
 #
 class Product < ApplicationRecord
   has_many :purchases, dependent: :destroy
+  belongs_to :store
 
   validates :name, presence: true
   validates :quantity, presence: true
@@ -31,7 +41,7 @@ class Product < ApplicationRecord
 
     Product.where(
       "true #{product_query}
-      ").left_joins(purchases: [:reviews]).distinct
+      ").left_joins(:store, purchases: [:reviews]).distinct
   end
 
 end

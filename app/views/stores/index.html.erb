@@ -2,14 +2,21 @@
 
 <h1>Stores</h1>
 
-TODO
+<ul>
+<% @stores.each do |store| %>
+  <li><%= link_to store.name, store_url(store) %></li>
+<% end %>
+</ul>
 
 <%
-  # TODO: (Bonus Task) Implement complete store functionality
+  # TODO: (Bonus Task) Implement complete store functionality #done
   # - Display all online stores here
   # - When clicked, go to stores#show page
   # - Add a link to create store
   # - Display store rating (based on the ratings from purchase reviews)
 %>
+
+<%= link_to 'Add Online Stores', new_store_url %>
+
 
 </div>
