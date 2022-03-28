@@ -52,4 +52,4 @@ Purchased at: <%= @purchase.created_at %>
     </div>
   </div>
 </div>
-<%= link_to 'Give a Review', new_review_url(review: { purchase_id: @purchase.id }) %>
+<%= link_to 'Give a Review', new_review_url(review: { purchase_id: @purchase.id }) if !@purchase.reviews.present?  %>

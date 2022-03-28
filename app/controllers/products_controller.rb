@@ -1,14 +1,18 @@
 class ProductsController < ApplicationController
-  before_action do
-    case action_name.to_sym
-    when :new, :create
-      @product = Product.new
-    when :show, :edit, :update, :destroy
-      @product = Product.get_data(id: params[:id])
-    end
-  end
+  # before_action :set_product, only: [:show, :edit, :update, :destroy]
+  before_action :set_product, only: [:show, :edit, :update, :destroy]
+
+  # before_action do
+  #   case action_name.to_sym
+  #   when :new, :create
+  #     @product = Product.new
+  #   when :show, :edit, :update, :destroy
+  #     @product = Product.get_data(id: params[:id])
+  #   end
+  # end
 
   def new
+    @product = Product.new
   end
 
   def create
@@ -29,6 +33,10 @@ class ProductsController < ApplicationController
   end
 
   private
+    def set_product
+      @product = Product.get_data(id: params[:id]) if !@product.present?
+    end
+
     def product_params
       params.require(:product).permit(:name, :quantity, :price)
     end

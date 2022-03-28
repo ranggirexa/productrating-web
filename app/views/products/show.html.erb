@@ -37,18 +37,19 @@
     </div>
   </div>
 </div>
-<%= link_to 'Buy', new_product_purchase_url(@product) %>
 
-<br />
-<br />
-
+<% if(@product.first.quantity.to_i - @product.first.purchases.sum(:quantity).to_i) == 0  %>
+  <h3> This Product has sold out </h3>
+<% else %>
+  <%= link_to 'Buy', new_product_purchase_url(@product.first.id) %>
+<% end %>
 <div>
 
-<h2>Purchases</h2>
+<h2>Purchases History</h2>
 
 <ul>
 <% @product.first.purchases.each do |purchase| %>
-  <li><%= link_to "Purchase ##{purchase.id}", product_purchase_url(@product, purchase) %></li>
+  <li><%= link_to "Purchase #{purchase.id}", product_purchase_path(@product.first.id, purchase.id) %></li>
 <% end %>
 </ul>
 
