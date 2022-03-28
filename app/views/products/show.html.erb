@@ -1,24 +1,43 @@
-<div>
-
-<h1>Product #<%= @product.id %></h1>
-
-Name: <%= @product.name %>
-<br />
-Price: <%= format_price @product.price %>
-<br />
-Quantity: <%= @product.quantity %>
-<br />
-<%# TODO: Format the date time to make it more readable %>
-Posted on: <%= @product.created_at.strftime("%d %B %Y") %>
-<br />
-<%# TODO: Calculate average rating based on the reviews from all of the product's purchases %>
-Average rating: TODO
-
-<br />
-<br />
-<%= link_to 'Buy', new_product_purchase_url(@product) %>
-
+<div class="box box-default">
+  <div class="box-header with-border">
+    <h3 class="box-title">
+      Product
+    </h3>
+  </div>
+  <div class="box-body">
+    <div class="table-responsive">
+      <table id="review_table" class="table table-bordered table-striped">
+        <thead>
+          <tr>
+            <th style="width: 10%;">id</th>
+            <th style="width: 10%;">Name </th>
+            <th style="width: 10%;">Price</th>
+            <th style="width: 10%;">Quantity</th>
+            <th style="width: 10%;">Sold</th>
+            <th style="width: 10%;">Stock Available</th>
+            <th style="width: 10%;">Posted on</th>
+            <th style="width: 10%;">Average Rating</th>
+          </tr>
+        </thead>
+        <tbody>
+          <% @product.each do |product| %>
+            <tr>
+              <td> <%= product.id %></td>
+              <td> <%= product.name %></td>
+              <td> <%= product.price %></td>
+              <td> <%= product.quantity %></td>
+              <td> <%= product.purchases.sum(:quantity) %></td>
+              <td> <%= product.quantity.to_i - product.purchases.sum(:quantity).to_i %></td>
+              <td> <%= product.created_at.strftime("%d-%m-%Y %H:%M") %></td>
+              <td> <%= product.created_at.strftime("%d-%m-%Y %H:%M") %></td>
+            </tr>
+          <% end %>
+        </tbody>
+      </table>
+    </div>
+  </div>
 </div>
+<%= link_to 'Buy', new_product_purchase_url(@product) %>
 
 <br />
 <br />
@@ -28,7 +47,7 @@ Average rating: TODO
 <h2>Purchases</h2>
 
 <ul>
-<% @product.purchases.each do |purchase| %>
+<% @product.first.purchases.each do |purchase| %>
   <li><%= link_to "Purchase ##{purchase.id}", product_purchase_url(@product, purchase) %></li>
 <% end %>
 </ul>

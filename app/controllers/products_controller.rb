@@ -4,7 +4,7 @@ class ProductsController < ApplicationController
     when :new, :create
       @product = Product.new
     when :show, :edit, :update, :destroy
-      @product = Product.find(params[:id])
+      @product = Product.get_data(id: params[:id])
     end
   end
 
@@ -25,11 +25,11 @@ class ProductsController < ApplicationController
   end
 
   def index
-    @products = Product.all
+    @products = Product.get_data(params)
   end
 
   private
     def product_params
       params.require(:product).permit(:name, :quantity, :price)
     end
-end  
+end
