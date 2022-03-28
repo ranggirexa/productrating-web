@@ -26,9 +26,20 @@ class Review < ApplicationRecord
   validate :rating_within_limit
 
   def rating_within_limit
-    # TODO: Implement validation logic for `rating`
+    # TODO: Implement validation logic for `rating` #done
     # - Rating cannot be greater than 5
     # - Rating cannot be a negative number
     # - Handle any potential error/crash
+  	if self.rating <= 0 || self.rating > 5
+  		errors.add(:base, "Rating should be 1 until 5")
+  	end
+  end
+
+  def self.get_data(params = {})
+    product_query = "and products.id = #{params[:product_id]}" if params[:product_id].present?
+
+    Review.where(
+      "true #{product_query}
+      ").left_joins(purchase: [:product]).distinct
   end
 end

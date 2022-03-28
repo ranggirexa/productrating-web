@@ -1,24 +1,25 @@
 <div>
-
 <h1>Purchase #<%= @purchase.id %></h1>
 
 Quantity: <%= @purchase.quantity %>
 <br />
 Address: <%= @purchase.delivery_address %>
 <br />
-<%# TODO: Format the date time to make it more readable %>
-Purchased at: <%= @purchase.created_at %>
+<%# TODO: Format the date time to make it more readable #done %>
+Purchased at: <%= @purchase.created_at.strftime("%d-%m-%Y %H:%M") %>
 
 <br />
 <br />
 
-<%# TODO: Open purchases#edit page %>
-<%= link_to 'Edit', '' %>
+<%# TODO: Open purchases#edit page #done %>
+<%= link_to 'Edit', edit_product_purchase_path(@purchase.product_id, @purchase.id) %>
 
 &nbsp;&nbsp;
 
-<%# TODO: Make a DELETE request to purchases#destroy %>
-<%= link_to 'Delete', '' %>
+<%# TODO: Make a DELETE request to purchases#destroy #done %>
+<%= link_to 'Delete',[@purchase.product, @purchase] , method: :delete %>
+
+<%= link_to 'Back', product_path(id: @purchase.product_id) %>
 
 </div>
 

@@ -10,7 +10,7 @@
 #  updated_at :datetime         not null
 #
 class Product < ApplicationRecord
-  has_many :purchases
+  has_many :purchases, dependent: :destroy
 
   validates :name, presence: true
   validates :quantity, presence: true

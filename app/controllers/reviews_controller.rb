@@ -1,23 +1,14 @@
 class ReviewsController < ApplicationController
   before_action :set_review, only: [:show, :edit, :update, :destroy]
   before_action :set_variables, only: [:new, :create]
-  #
-  # before_action do
-  #   case action_name.to_sym
-  #   when :new, :create
-  #     @review = Review.new
-  #   end
-  # end
 
   def new
-    # @review.assign_attributes(review_params)
-
     @review = Review.new(purchase_id: @purchase_id)
 
   end
 
   def create
-    # TODO: Create the record in database
+    # TODO: Create the record in database #done
     @review = Review.new(review_params)
     @review.assign_attributes(review_params)
     if @review.save

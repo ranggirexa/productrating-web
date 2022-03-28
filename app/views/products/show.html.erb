@@ -29,7 +29,7 @@
               <td> <%= product.purchases.sum(:quantity) %></td>
               <td> <%= product.quantity.to_i - product.purchases.sum(:quantity).to_i %></td>
               <td> <%= product.created_at.strftime("%d-%m-%Y %H:%M") %></td>
-              <td> <%= product.created_at.strftime("%d-%m-%Y %H:%M") %></td>
+              <td> <%= @review.average(:rating).to_f.round(2) %></td>
             </tr>
           <% end %>
         </tbody>
@@ -43,7 +43,9 @@
 <% else %>
   <%= link_to 'Buy', new_product_purchase_url(@product.first.id) %>
 <% end %>
+
 <div>
+  <%= link_to 'Back', products_path %>
 
 <h2>Purchases History</h2>
 

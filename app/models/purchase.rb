@@ -19,7 +19,7 @@
 #
 class Purchase < ApplicationRecord
   belongs_to :product
-  has_many :reviews
+  has_many :reviews, dependent: :destroy
 
   validates :quantity, presence: true, numericality: {less_than_or_equal_to: :stock_available, only_integer: true }
   validates :delivery_address, presence: true
